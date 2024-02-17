@@ -42,6 +42,7 @@ class Alternative {
         }
         return PX;
     }
+
     static show_table = (set, parent) => {
         const table = document.createElement("div");
         table.classList.add("table");
@@ -62,6 +63,44 @@ class Alternative {
             table.appendChild(elementq1);
             table.appendChild(elementq2);
         }
+    };
+
+    static show_graph = (set, solution_set, graphId, parent) => {
+        const graph = document.createElement(`div`);
+        graph.id = graphId;
+        graph.classList.add("graph-wrapper");
+        parent.appendChild(graph);
+
+        solution_set.sort((a, b) => {
+            if (a.Q1 === b.Q1) {
+                return b.Q2 - a.Q2;
+            }
+            return a.Q1 - b.Q1;
+        });
+
+        const main_trace = {
+            x: Array.from({ length: set.length }, (_, i) => set[i].Q1),
+            y: Array.from({ length: set.length }, (_, i) => set[i].Q2),
+            text: Array.from({ length: set.length }, (_, i) => "A" + (i + 1)),
+            textposition: "bottom right",
+            mode: "markers+text",
+            type: "scatter",
+            name: "Початкова множина",
+        };
+        const solution_trace = {
+            x: Array.from(
+                { length: solution_set.length },
+                (_, i) => solution_set[i].Q1,
+            ),
+            y: Array.from(
+                { length: solution_set.length },
+                (_, i) => solution_set[i].Q2,
+            ),
+            mode: "markers+text+lines",
+            type: "scatter",
+            name: "Границя Парето/Слейтера",
+        };
+        Plotly.newPlot(`${graphId}`, [main_trace, solution_trace]);
     };
 }
 
