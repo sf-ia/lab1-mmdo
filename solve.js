@@ -102,6 +102,29 @@ class Alternative {
         };
         Plotly.newPlot(`${graphId}`, [main_trace, solution_trace]);
     };
+
+    static show_set_info = (set, solution_set, id, Pareto) => {
+        const parent = document.createElement("div");
+        if (Pareto) {
+            parent.id = `pareto${id}`;
+        } else {
+            parent.id = `sleyter${id}`;
+        }
+        parent.classList.add("set-info");
+        document.body.appendChild(parent);
+
+        const header = document.createElement("h2");
+        if (Pareto) {
+            header.innerHTML = `Розв'язок для ${id}-ої множини за Парето`;
+        } else {
+            header.innerHTML = `Розв'язок для ${id}-ої множини за Слейтером`;
+        }
+        parent.appendChild(header);
+        console.log(header);
+
+        Alternative.show_table(solution_set, parent);
+        Alternative.show_graph(set, solution_set, parent.id + "-graph", parent);
+    };
 }
 
 let set1 = [
