@@ -23,6 +23,25 @@ class Alternative {
         }
         return alternatives;
     };
+
+    static solve(alternatives, Pareto = true) {
+        let PX = alternatives;
+
+        for (let A1 of PX) {
+            for (let A2 of PX) {
+                if (!(PX.includes(A1) || !PX.includes(A2)) || A1 === A2) {
+                    continue;
+                }
+                if (A1.compare(A2, Pareto)) {
+                    PX = PX.filter((x) => !(x === A2));
+                } else if (A2.compare(A1, Pareto)) {
+                    PX = PX.filter((x) => !(x === A1));
+                    break;
+                }
+            }
+        }
+        return PX;
+    }
 }
 
 let set1 = [
@@ -42,3 +61,17 @@ let set3 = [
 alt1 = Alternative.get_alternatives(set1);
 alt2 = Alternative.get_alternatives(set2);
 alt3 = Alternative.get_alternatives(set3);
+
+par1 = Alternative.solve(alt1);
+par2 = Alternative.solve(alt2);
+par3 = Alternative.solve(alt3);
+console.log("Вирішення для першої множини за Парето", par1);
+console.log("Вирішення для другої множини за Парето", par2);
+console.log("Вирішення для третьої множини за Парето", par3);
+
+sley1 = Alternative.solve(alt1, false);
+sley2 = Alternative.solve(alt2, false);
+sley3 = Alternative.solve(alt3, false);
+console.log("Вирішення для першої множини за Слейтером", sley1);
+console.log("Вирішення для другої множини за Слейтером", sley2);
+console.log("Вирішення для третьої множини за Слейтером", sley3);
