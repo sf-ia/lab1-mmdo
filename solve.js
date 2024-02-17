@@ -151,6 +151,9 @@ par3 = Alternative.solve(alt3);
 console.log("Вирішення для першої множини за Парето", par1);
 console.log("Вирішення для другої множини за Парето", par2);
 console.log("Вирішення для третьої множини за Парето", par3);
+Alternative.show_set_info(alt1, par1, 1, true);
+Alternative.show_set_info(alt2, par2, 2, true);
+Alternative.show_set_info(alt3, par3, 3, true);
 
 sley1 = Alternative.solve(alt1, false);
 sley2 = Alternative.solve(alt2, false);
@@ -158,3 +161,6 @@ sley3 = Alternative.solve(alt3, false);
 console.log("Вирішення для першої множини за Слейтером", sley1);
 console.log("Вирішення для другої множини за Слейтером", sley2);
 console.log("Вирішення для третьої множини за Слейтером", sley3);
+Alternative.show_set_info(alt1, sley1, 1, false);
+Alternative.show_set_info(alt2, sley2, 2, false);
+Alternative.show_set_info(alt3, sley3, 3, false);
