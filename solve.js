@@ -42,6 +42,27 @@ class Alternative {
         }
         return PX;
     }
+    static show_table = (set, parent) => {
+        const table = document.createElement("div");
+        table.classList.add("table");
+        parent.appendChild(table);
+
+        const header1 = document.createElement("div");
+        const header2 = document.createElement("div");
+        header1.innerHTML = "Q1";
+        header2.innerHTML = "Q2";
+        table.appendChild(header1);
+        table.appendChild(header2);
+
+        for (let alternative of set) {
+            const elementq1 = document.createElement("div");
+            const elementq2 = document.createElement("div");
+            elementq1.innerHTML = alternative.Q1;
+            elementq2.innerHTML = alternative.Q2;
+            table.appendChild(elementq1);
+            table.appendChild(elementq2);
+        }
+    };
 }
 
 let set1 = [
